@@ -21,12 +21,13 @@ namespace ConsoleApp1
 
         public void ZmienStan(string stan)
         {
-            if(stan == "puste" || stan == "zajęte" || stan == "trafione" || stan == "nietrafione")
+            if (stan == "puste" || stan == "zajęte" || stan == "trafione" || stan == "nietrafione")
                 this.stan = stan;
         }
 
 
-        public bool przyjecieStrzaly() {
+        public bool przyjecieStrzaly()
+        {
 
             if (stan == "zajęte")
             {
@@ -41,6 +42,6 @@ namespace ConsoleApp1
 
         }
 
-        
+
     }
 }

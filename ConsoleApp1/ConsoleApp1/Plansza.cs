@@ -10,16 +10,17 @@ namespace ConsoleApp1
     {
         public int wielkosc;
         public Pole[,] plansza;
-        public Plansza( int wielkosc) {
+        public Plansza(int wielkosc)
+        {
             this.wielkosc = wielkosc;
 
-            plansza = new Pole[wielkosc ,wielkosc];
+            plansza = new Pole[wielkosc, wielkosc];
 
             for (int i = 0; i < wielkosc; i++)
             {
                 for (int j = 0; j < wielkosc; j++)
                 {
-                    plansza[i, j] = new Pole(i,j);
+                    plansza[i, j] = new Pole(i, j);
                 }
             }
 
@@ -29,8 +30,8 @@ namespace ConsoleApp1
 
             for (int i = 0; i < iloscStatkow; i++)
             {
-                int x = rand.Next(0, wielkosc);
-                int y = rand.Next(0, wielkosc);
+                int x = rand.Next(0, wielkosc - 1);
+                int y = rand.Next(0, wielkosc - 1);
 
                 if (plansza[x, y].stan.Equals("zajęte"))
                 {
@@ -38,21 +39,22 @@ namespace ConsoleApp1
                 }
                 else
                 {
-                    if(x-1>=0 || plansza[x - 1, y].stan.Equals("zajęte"))
-                    {
-                        i--;
-                        continue;
-                    }else if(x + 1 < wielkosc || plansza[x + 1, y].stan.Equals("zajęte"))
+                    if (x - 1 >= 0 && plansza[x - 1, y].stan.Equals("zajęte"))
                     {
                         i--;
                         continue;
                     }
-                    else if (y - 1 >= 0 || plansza[x, y - 1].stan.Equals("zajęte"))
+                    else if (x + 1 < wielkosc && plansza[x + 1, y].stan.Equals("zajęte"))
                     {
                         i--;
                         continue;
                     }
-                    else if (y + 1 < wielkosc || plansza[x, y + 1].stan.Equals("zajęte"))
+                    else if (y - 1 >= 0 && plansza[x, y - 1].stan.Equals("zajęte"))
+                    {
+                        i--;
+                        continue;
+                    }
+                    else if (y + 1 < wielkosc && plansza[x, y + 1].stan.Equals("zajęte"))
                     {
                         i--;
                         continue;
@@ -68,33 +70,44 @@ namespace ConsoleApp1
 
         public void wyswietl()
         {
-            for(int i = 0; i < wielkosc; i++)
+            for(int j= 0; j < wielkosc; j++)
             {
+                Console.Write(" "+j );
+            }
+            Console.WriteLine();
+            for (int i = 0; i < wielkosc; i++)
+            {
+                Console.Write(i);
                 for (int j = 0; j < wielkosc; j++)
                 {
-                    if(plansza[i, j].stan.Equals("zajęte"))
+                  
+                    if (plansza[i, j].stan.Equals("zajęte"))
                     {
-                        
+
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.Write("O" + " ");
+                        Console.BackgroundColor = ConsoleColor.Black;
                     }
                     else if (plansza[i, j].stan.Equals("trafione"))
                     {
                         Console.BackgroundColor = ConsoleColor.Red;
                         Console.Write("X" + " ");
+                        Console.BackgroundColor = ConsoleColor.Black;
                     }
                     else if (plansza[i, j].stan.Equals("nietrafione"))
                     {
                         Console.BackgroundColor = ConsoleColor.Gray;
                         Console.Write("x" + " ");
+                        Console.BackgroundColor = ConsoleColor.Black;
                     }
                     else
                     {
                         Console.BackgroundColor = ConsoleColor.Blue;
                         Console.Write("~" + " ");
+                        Console.BackgroundColor = ConsoleColor.Black;
                     }
                 }
-                Console.BackgroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Black;
                 Console.WriteLine();
             }
         }
@@ -104,11 +117,11 @@ namespace ConsoleApp1
         {
             if (plansza[x, y].przyjecieStrzaly())
             {
-                if(x - 1 >= 0)
+                if (x - 1 >= 0)
                 {
                     plansza[x - 1, y].stan = "puste";
                 }
-                if(x + 1 < wielkosc)
+                if (x + 1 < wielkosc)
                 {
                     plansza[x + 1, y].stan = "puste";
                 }
