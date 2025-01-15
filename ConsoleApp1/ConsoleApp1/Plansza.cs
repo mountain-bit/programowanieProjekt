@@ -113,25 +113,64 @@ namespace ConsoleApp1
         }
 
 
+        public void wyswietlDlaWrog()
+        {
+            for (int j = 0; j < wielkosc; j++)
+            {
+                Console.Write(" " + j);
+            }
+            Console.WriteLine();
+            for (int i = 0; i < wielkosc; i++)
+            {
+                Console.Write(i);
+                for (int j = 0; j < wielkosc; j++)
+                {
+
+                     if (plansza[i, j].stan.Equals("trafione"))
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.Write("X" + " ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    else if (plansza[i, j].stan.Equals("nietrafione"))
+                    {
+                        Console.BackgroundColor = ConsoleColor.Gray;
+                        Console.Write("x" + " ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.Blue;
+                        Console.Write("~" + " ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                }
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.WriteLine();
+            }
+        }
+
+
+
         public bool strzal(int x, int y)
         {
             if (plansza[x, y].przyjecieStrzaly())
             {
                 if (x - 1 >= 0)
                 {
-                    plansza[x - 1, y].stan = "puste";
+                    plansza[x - 1, y].stan = "nietrafione";
                 }
                 if (x + 1 < wielkosc)
                 {
-                    plansza[x + 1, y].stan = "puste";
+                    plansza[x + 1, y].stan = "nietrafione";
                 }
                 if (y - 1 >= 0)
                 {
-                    plansza[x, y - 1].stan = "puste";
+                    plansza[x, y - 1].stan = "nietrafione";
                 }
                 if (y + 1 < wielkosc)
                 {
-                    plansza[x, y + 1].stan = "puste";
+                    plansza[x, y + 1].stan = "nietrafione";
                 }
                 return true;
             }
